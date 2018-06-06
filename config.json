@@ -1,0 +1,58 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbound": {
+    "port": 51413,
+    "listen": "0.0.0.0",
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
+        {
+          "id": "ID",
+          "alterId": 64
+        }
+      ],
+      "detour": {
+        "to": "kcp"
+      }
+    },
+    "streamSettings": {
+      "network": "kcp"
+    }
+  },
+  "inboundDetour": [
+    {
+      "protocol": "vmess",
+      "port": "10000-10100",
+      "tag": "kcp",
+      "settings": {},
+      "allocate": {
+        "strategy": "random",
+        "concurrency": 10,
+        "refresh": 5
+      },
+      "streamSettings": {
+        "network": "kcp"
+      }
+    }
+  ],
+  "outbound": {
+    "protocol": "freedom",
+    "settings": {}
+  },
+  "transport": {
+    "kcpSettings": {
+      "mtu": 1400,
+      "tti": 20,
+      "uplinkCapacity": 5,
+      "downlinkCapacity": 2,
+      "congestion": true,
+      "readBufferSize": 2,
+      "writeBufferSize": 2,
+      "header": {
+        "type": "utp"
+      }
+    }
+  }
+}
