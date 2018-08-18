@@ -10,7 +10,7 @@
       "clients": [
         {
           "id": "ID",
-          "alterId": 64
+          "alterId": 16
         }
       ],
       "detour": {
@@ -53,6 +53,28 @@
       "header": {
         "type": "utp"
       }
+    }
+  },
+  "routing": {
+    "strategy": "rules",
+    "settings": {
+      "domainStrategy": "IPIfNonMatch",
+      "rules": [
+        {
+          "type": "field",
+          "inboundTag": [
+            "tg-in"
+          ],
+          "outboundTag": "tg-out"
+        },
+        {
+          "type": "field",
+          "outboundTag": "block",
+          "protocol": [
+            "bittorrent"
+          ]
+        }
+      ]
     }
   }
 }
